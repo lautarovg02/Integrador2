@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Student {
 
     }
 
-    public Student(Long DNI, String name, String lastName, char genre, String city, int age, int uniNumber, List<Tuition> careers) {
+    public Student(Long DNI, String name, String lastName, char genre, String city, int age, int uniNumber) {
         this.DNI = DNI;
         this.name = name;
         this.lastName = lastName;
@@ -35,7 +36,17 @@ public class Student {
         this.city = city;
         this.age = age;
         this.uniNumber = uniNumber;
-        this.careers = careers;
+        this.careers = new ArrayList<>();
+    }
+
+    public Student(long dni, String name, String lastName, String city, int age, int uniNumber) {
+        this.DNI = dni;
+        this.name = name;
+        this.lastName = lastName;
+        this.city = city;
+        this.age = age;
+        this.uniNumber = uniNumber;
+        this.careers = new ArrayList<>();
     }
 
     public Long getDNI() {
@@ -100,5 +111,17 @@ public class Student {
 
     public void setCareers(List<Tuition> careers) {
         this.careers = careers;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "DNI=" + DNI +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", city='" + city + '\'' +
+                ", age=" + age +
+                ", uniNumber=" + uniNumber +
+                '}';
     }
 }

@@ -24,11 +24,11 @@ public class TuitionID implements Serializable {
         this.DNI = DNI;
     }
 
-    public int getId_career() {
+    public int getIdCareer() {
         return idCareer;
     }
 
-    public void setId_career(int idCareer) {
+    public void setIdCareer(int idCareer) {
         this.idCareer = idCareer;
     }
 }

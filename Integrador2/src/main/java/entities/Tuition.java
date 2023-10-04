@@ -11,15 +11,12 @@ public class Tuition {
     private TuitionID id= new TuitionID();
 
     @ManyToOne
-    @MapsId("idCareer")
     @JoinColumn(name = "fk_id_career")
     private Career career;
 
     @ManyToOne
-    @MapsId("DNI")
     @JoinColumn(name = "fk_DNI")
     private Student student;
-
 
     @Column
     private Timestamp antiquity;
