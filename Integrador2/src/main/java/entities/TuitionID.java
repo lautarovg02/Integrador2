@@ -5,30 +5,38 @@ import java.io.Serializable;
 
 
 public class TuitionID implements Serializable {
-    private int DNI;
-    private  int idCareer;
+    private Long DNI;
+    private  Long idCareer;
 
     public TuitionID() {
     }
-
-    public TuitionID(int DNI, int idCareer) {
+//
+    public TuitionID(Long DNI, Long idCareer) {
         this.DNI = DNI;
         this.idCareer = idCareer;
     }
 
-    public int getDNI() {
+    public Long getDNI() {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(Long DNI) {
         this.DNI = DNI;
     }
 
-    public int getIdCareer() {
+    public Long getIdCareer() {
         return idCareer;
     }
 
-    public void setIdCareer(int idCareer) {
+    @Override
+    public String toString() {
+        return "TuitionID{" +
+                "DNI=" + DNI +
+                ", idCareer=" + idCareer +
+                '}';
+    }
+
+    public void setIdCareer(Long idCareer) {
         this.idCareer = idCareer;
     }
 }

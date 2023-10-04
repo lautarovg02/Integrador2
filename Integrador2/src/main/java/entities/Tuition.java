@@ -19,11 +19,36 @@ public class Tuition {
     private Student student;
 
     @Column
-    private Timestamp antiquity;
+    private int antiquity;
 
     @Column
     private boolean graduate;
 
+    public Tuition(TuitionID id, int antiquity, boolean graduate) {
+        this.id = id;
+        this.antiquity = antiquity;
+        this.graduate = graduate;
+    }
 
+    public Tuition() {
 
+    }
+
+    public Tuition(TuitionID id, int antiquity, Student s, Career c, boolean graduate) {
+        this.id = id;
+        this.antiquity = antiquity;
+        this.graduate = graduate;
+        this.student = s;
+        this.career = c;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Tuition{" +
+                "id=" + id +
+                ", antiquity=" + antiquity +
+                ", graduate=" + graduate +
+                '}';
+    }
 }

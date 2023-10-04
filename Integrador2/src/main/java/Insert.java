@@ -1,4 +1,7 @@
+import entities.Career;
 import entities.Student;
+import entities.Tuition;
+import entities.TuitionID;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -8,10 +11,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class Insert {
     private static String pathFilesCsv = "./src/main/resources/csv/";
-    private static final String STUDENT_FILE = "students.csv", PERSISTENCE_NAME = "Integrador2";
+    private static final String STUDENT_FILE = "students.csv", TUITION_CSV = "tuition.csv" , CAREER_FILE = "career.csv", PERSISTENCE_NAME = "Integrador2";
 
     protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
     protected static EntityManager em = emf.createEntityManager();
@@ -19,24 +23,51 @@ public class Insert {
 
         em.getTransaction().begin();
 
-        Student p = null;
-        System.out.print("Cargando estudiantes .....................");
-        CSVParser parser = getCSVParser(STUDENT_FILE);
-        for (CSVRecord row : parser) {
-            System.out.println(row.get(0) + " , "  +  row.get(1) +  ", " +  row.get(2) +  ", " +  row.get(4) +  ", " +   Integer.parseInt(row.get(5))  +  ", " +  Integer.parseInt(row.get(6)));
-            Long dni =  Long.parseLong(row.get(0));
-            String name  = row.get(1);
-            String lastName  = row.get(2);
-            String city  = row.get(4);
-            Integer age  =  Integer.parseInt(row.get(5));
-            Integer uniNumber  =  Integer.parseInt(row.get(6));
-            p = new Student(dni,name,lastName,city,age,uniNumber);
-            em.persist(p);
-            System.out.println(p);
-            System.out.print(".");
-        }
-        System.out.print(" .....................PROCESO FINALIZADO \n ");
+        /*** CARGAR DE UNA ENTIDAD A LA VES */
 
+//        Student p = null;
+//        System.out.print("Cargando estudiantes .....................");
+//        CSVParser parser = getCSVParser(STUDENT_FILE);
+//        for (CSVRecord row : parser) {
+//            System.out.println(row.get(0) + " , "  +  row.get(1) +  ", " +  row.get(2) +  ", " +  row.get(4) +  ", " +   Integer.parseInt(row.get(5))  +  ", " +  Integer.parseInt(row.get(6)));
+//            Long dni =  Long.parseLong(row.get(0));
+//            String name  = row.get(1);
+//            String lastName  = row.get(2);
+//            String city  = row.get(4);
+//            Integer age  =  Integer.parseInt(row.get(5));
+//            Integer uniNumber  =  Integer.parseInt(row.get(6));
+//            p = new Student(dni,name,lastName,city,age,uniNumber);
+//            em.persist(p);
+//            System.out.println(p);
+//            System.out.print(".");
+//        }
+//        System.out.print(" .....................PROCESO FINALIZADO \n ");
+
+        /*** CARGAR DE UNA ENTIDAD A LA VES */
+
+//        Career c = null;
+//        System.out.print("Cargando Career .....................");
+//        CSVParser parser = getCSVParser(CAREER_FILE);
+//        for (CSVRecord row : parser) {
+//           c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
+//            System.out.println(c);
+//            em.persist(c);
+//        }
+//        System.out.print(" .....................PROCESO FINALIZADO \n ");
+
+//        TuitionID tId = null;
+//        Tuition t = null;
+//        System.out.print("Cargando TUITON_FILE .....................");
+//        CSVParser parser = getCSVParser(TUITION_CSV);
+//        for (CSVRecord row : parser) {
+//            tId = new TuitionID(Long.parseLong(row.get(0)),Long.parseLong(row.get(1)));
+//            Student s = em.find(Student.class, Long.parseLong(row.get(0)));
+//            Career c = em.find(Career.class, Long.parseLong(row.get(1)));
+//            t = new Tuition(tId, Integer.parseInt(row.get(2)),s, c ,false);
+//            System.out.println(t);
+//            em.persist(t);
+//        }
+//        System.out.print(" .....................PROCESO FINALIZADO \n ");
 
         // CLOSE
         em.getTransaction().commit();
