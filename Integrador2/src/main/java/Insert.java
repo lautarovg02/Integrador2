@@ -1,7 +1,6 @@
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
-import entities.TuitionID;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -15,10 +14,11 @@ import java.sql.Timestamp;
 
 public class Insert {
     private static String pathFilesCsv = "./src/main/resources/csv/";
-    private static final String STUDENT_FILE = "students.csv", TUITION_CSV = "tuition.csv" , CAREER_FILE = "career.csv", PERSISTENCE_NAME = "Integrador2";
+    private static final String STUDENT_FILE = "students.csv", TUITION_CSV = "tuition.csv", CAREER_FILE = "career.csv", PERSISTENCE_NAME = "Integrador2";
 
     protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
     protected static EntityManager em = emf.createEntityManager();
+
     public static void main(String[] args) {
 
         em.getTransaction().begin();
@@ -55,15 +55,14 @@ public class Insert {
 //        }
 //        System.out.print(" .....................PROCESO FINALIZADO \n ");
 
-//        TuitionID tId = null;
 //        Tuition t = null;
 //        System.out.print("Cargando TUITON_FILE .....................");
 //        CSVParser parser = getCSVParser(TUITION_CSV);
+//        long counter = 0;
 //        for (CSVRecord row : parser) {
-//            tId = new TuitionID(Long.parseLong(row.get(0)),Long.parseLong(row.get(1)));
 //            Student s = em.find(Student.class, Long.parseLong(row.get(0)));
 //            Career c = em.find(Career.class, Long.parseLong(row.get(1)));
-//            t = new Tuition(tId, Integer.parseInt(row.get(2)),s, c ,false);
+//            t = new Tuition(Integer.parseInt(row.get(2)), s, c, false);
 //            System.out.println(t);
 //            em.persist(t);
 //        }

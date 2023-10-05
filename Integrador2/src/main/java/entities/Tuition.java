@@ -7,8 +7,10 @@ import java.util.Date;
 @Entity
 public class Tuition {
 
-    @EmbeddedId
-    private TuitionID id= new TuitionID();
+    @Id
+    @Column(name = "id_tuition")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @ManyToOne
     @JoinColumn(name = "fk_id_career")
@@ -24,18 +26,27 @@ public class Tuition {
     @Column
     private boolean graduate;
 
-    public Tuition(TuitionID id, int antiquity, boolean graduate) {
+    public Tuition(Long id, int antiquity, boolean graduate) {
         this.id = id;
         this.antiquity = antiquity;
         this.graduate = graduate;
     }
 
+
     public Tuition() {
 
     }
 
-    public Tuition(TuitionID id, int antiquity, Student s, Career c, boolean graduate) {
+    public Tuition(Long id, int antiquity, Student s, Career c, boolean graduate) {
         this.id = id;
+        this.antiquity = antiquity;
+        this.graduate = graduate;
+        this.student = s;
+        this.career = c;
+
+    }
+
+    public Tuition(int antiquity, Student s, Career c, boolean graduate) {
         this.antiquity = antiquity;
         this.graduate = graduate;
         this.student = s;

@@ -18,7 +18,7 @@ public class Career {
     @Column
     private  int duration;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "student")
     private List<Tuition> tuitons;
 
     public Career() {

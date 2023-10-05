@@ -21,7 +21,7 @@ public class Student {
     @Column
     private  int uniNumber;
 
-    @OneToMany
+    @OneToMany(mappedBy = "career")
     private List<Tuition> careers;
 
     public Student() {
