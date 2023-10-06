@@ -69,6 +69,9 @@ public class Career {
                 "idCareer=" + idCareer +
                 ", name='" + name + '\'' +
                 ", duration=" + duration +
-                '}';
+                '}' + "\n";
     }
+
+
+
 }

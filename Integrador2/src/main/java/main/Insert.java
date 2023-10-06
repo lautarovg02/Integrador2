@@ -1,6 +1,7 @@
 package main;
 
 import dao.StudentDAO;
+import dao.TuitionDAO;
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
@@ -22,7 +23,29 @@ public class Insert {
         //EMTITY MANAGER
         EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        // EJERCICIO 2-B
+        Tuition t = null;
+        System.out.print("Cargando TUITON_FILE .....................");
+        CSVParser parser = getCSVParser(TUITION_CSV);
+        long counter = 0;
+        TuitionDAO tDAO = new TuitionDAO(em);
+        for (CSVRecord row : parser) {
+            Student student = em.find(Student.class, Long.parseLong(row.get(1)));
+            Career career = em.find(Career.class, Long.parseLong(row.get(2)));
+            int inscription = Integer.parseInt(row.get(3));
+            int antiquity = Integer.parseInt(row.get(5));
+            int graduate = Integer.parseInt(row.get(4));
+            t = new Tuition(career,student,antiquity, inscription , graduate);
+            System.out.println(t);
+            tDAO.addTution(t);
+        }
+        em.close();
+        System.out.print(" .....................PROCESO FINALIZADO \n ");
+
+
+
+
+
 
 //        //EJERCICIO 2-A
 //        Student newStudent = null;
@@ -38,13 +61,14 @@ public class Insert {
 //            Integer uniNumber  =  Integer.parseInt(row.get(6));
 //            newStudent = new Student(dni,name,lastName,genere,city,age,uniNumber);
 //            System.out.println(newStudent);
-//            studentDAO.addStudent(newStudent);
+//           studentDAO.addStudent(newStudent);
 //        }
 //        em.close();//Lo dejamos sino se rompe por abrir y cerrar muchas conexiones
 
         /*
          * CARGANDO ENTIDADES SIN DAOS
          */
+//        em.getTransaction().begin(); //** DESCOMENTAR EN CASO DE CARGAR ENTIDADES SIN DAO  Y DESCOMENTAR 97 y 98**
 //        Student p = null;
 //        System.out.print("Cargando estudiantes .....................");
 //        CSVParser parserStudents = getCSVParser(STUDENT_FILE);
@@ -77,6 +101,7 @@ public class Insert {
 
 
 //        /*** CARGAR DE UNA ENTIDAD A LA VES */
+//        em.getTransaction().begin();
 //        Tuition t = null;
 //        System.out.print("Cargando TUITON_FILE .....................");
 //        CSVParser parser = getCSVParser(TUITION_CSV);
@@ -93,11 +118,19 @@ public class Insert {
 //        }
 //        System.out.print(" .....................PROCESO FINALIZADO \n ");
 
+
+
         // CLOSE
-        em.getTransaction().commit();
-        em.close();
+//        em.getTransaction().commit();
+//        em.close();
         emf.close();
     }
+
+
+
+
+
+
 
     private static CSVParser getCSVParser(String file) {
         CSVParser p = null;

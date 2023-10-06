@@ -112,6 +112,6 @@ public class Student {
                 ", city='" + city + '\'' +
                 ", age=" + age +
                 ", uniNumber=" + uniNumber +
-                '}';
+                '}' + "\n";
     }
 }

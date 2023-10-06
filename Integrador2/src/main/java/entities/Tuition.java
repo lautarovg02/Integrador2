@@ -41,13 +41,37 @@ public class Tuition {
 
     @Override
     public String toString() {
-        return "Tuition{" +
-                "id=" + id +
-                ", career=" + career +
-                ", student=" + student +
-                ", antiquity=" + antiquity +
-                ", inscription=" + inscription +
-                ", graduate=" + graduate +
-                '}';
+        return "Tuition{"+ "\n" +
+                " id=" + id + "\n" +
+                " career=" + career +
+                " student=" + student +
+                " antiquity=" + antiquity +
+                " inscription=" + inscription +
+                " graduate=" + graduate +
+                "\n"+ '}' + "\n";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Career getCareer() {
+        return career;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public int getAntiquity() {
+        return antiquity;
+    }
+
+    public int getInscription() {
+        return inscription;
+    }
+
+    public int getGraduate() {
+        return graduate;
     }
 }
