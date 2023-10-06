@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(name = Career.SEARCH_ALL_CAREERS, query = "SELECT c FROM Career c")
 public class Career {
 
-
+    public static final String SEARCH_ALL_CAREERS = "Career.SEARCH_ALL_CAREERS" ;
     @Id
     @Column(name = "id_career")
     private long idCareer;

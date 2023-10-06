@@ -1,10 +1,14 @@
 package dao;
 
+import entities.Career;
 import entities.Student;
 import factory.MyFactoryEntityManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NamedQuery;
+import javax.persistence.Query;
+import java.util.List;
 
 public class StudentDAO {
     EntityManager em;
@@ -22,4 +26,5 @@ public class StudentDAO {
         em.getTransaction().commit();
 
     }
+
 }
