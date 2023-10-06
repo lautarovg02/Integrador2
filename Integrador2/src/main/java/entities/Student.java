@@ -9,17 +9,17 @@ public class Student {
     @Id
     private Long DNI;
     @Column
-    private  String name;
+    private String name;
     @Column
-    private  String lastName;
+    private String lastName;
     @Column
-    private char genre;
+    private String genre;
     @Column
     private String city;
     @Column
-    private  int age;
+    private int age;
     @Column
-    private  int uniNumber;
+    private int uniNumber;
 
     @OneToMany(mappedBy = "career")
     private List<Tuition> careers;
@@ -28,21 +28,11 @@ public class Student {
 
     }
 
-    public Student(Long DNI, String name, String lastName, char genre, String city, int age, int uniNumber) {
+    public Student(Long DNI, String name, String lastName, String genre, String city, int age, int uniNumber) {
         this.DNI = DNI;
         this.name = name;
         this.lastName = lastName;
         this.genre = genre;
-        this.city = city;
-        this.age = age;
-        this.uniNumber = uniNumber;
-        this.careers = new ArrayList<>();
-    }
-
-    public Student(long dni, String name, String lastName, String city, int age, int uniNumber) {
-        this.DNI = dni;
-        this.name = name;
-        this.lastName = lastName;
         this.city = city;
         this.age = age;
         this.uniNumber = uniNumber;
@@ -73,11 +63,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public char getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(char genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

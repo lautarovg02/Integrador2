@@ -16,7 +16,7 @@ public class Career {
     private String name;
 
     @Column
-    private  int duration;
+    private int duration;
 
     @OneToMany(mappedBy = "student")
     private List<Tuition> tuitons;

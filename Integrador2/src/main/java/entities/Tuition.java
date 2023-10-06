@@ -22,35 +22,20 @@ public class Tuition {
 
     @Column
     private int antiquity;
-
     @Column
-    private boolean graduate;
+    private int inscription;
+    @Column
+    private int graduate;
 
-    public Tuition(Long id, int antiquity, boolean graduate) {
-        this.id = id;
+    public Tuition(Career career, Student student, int antiquity, int inscription, int graduate) {
+        this.career = career;
+        this.student = student;
         this.antiquity = antiquity;
+        this.inscription = inscription;
         this.graduate = graduate;
     }
-
 
     public Tuition() {
-
-    }
-
-    public Tuition(Long id, int antiquity, Student s, Career c, boolean graduate) {
-        this.id = id;
-        this.antiquity = antiquity;
-        this.graduate = graduate;
-        this.student = s;
-        this.career = c;
-
-    }
-
-    public Tuition(int antiquity, Student s, Career c, boolean graduate) {
-        this.antiquity = antiquity;
-        this.graduate = graduate;
-        this.student = s;
-        this.career = c;
 
     }
 
@@ -58,7 +43,10 @@ public class Tuition {
     public String toString() {
         return "Tuition{" +
                 "id=" + id +
+                ", career=" + career +
+                ", student=" + student +
                 ", antiquity=" + antiquity +
+                ", inscription=" + inscription +
                 ", graduate=" + graduate +
                 '}';
     }
