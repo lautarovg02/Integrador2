@@ -19,7 +19,7 @@ public class Career {
     private int duration;
 
     @OneToMany(mappedBy = "student")
-    private List<Tuition> tuitons;
+    private List<Tuition> tuitions;
 
     public Career() {
     }
@@ -28,7 +28,7 @@ public class Career {
         this.idCareer = idCareer;
         this.name = name;
         this.duration = duration;
-        this.tuitons = new ArrayList<>();
+        this.tuitions = new ArrayList<>();
     }
 
     public long getIdCareer() {
@@ -55,12 +55,15 @@ public class Career {
         this.duration = duration;
     }
 
-    public List<Tuition> getTuitons() {
-        return tuitons;
+    public List<Tuition> getTuitions() {
+        return tuitions;
     }
 
-    public void setTuitons(List<Tuition> tuitons) {
-        this.tuitons = tuitons;
+    public void setTuitions(List<Tuition> tuitions) {
+        this.tuitions = tuitions;
+    }
+    public void addTuitions(Tuition tuition) {
+        this.tuitions.add(tuition);
     }
 
     @Override
@@ -71,7 +74,4 @@ public class Career {
                 ", duration=" + duration +
                 '}' + "\n";
     }
-
-
-
 }

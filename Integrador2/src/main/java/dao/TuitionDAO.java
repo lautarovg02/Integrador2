@@ -27,8 +27,9 @@ public class TuitionDAO {
             Query query = em.createQuery(jpql);
             query.setParameter("DNI", existS);
             query.setParameter("id_career", existC);
-            Tuition tuitionExist = (Tuition) query.getResultList().get(0);
-            if (tuitionExist == null) {
+            List<Tuition> tuitionExist = query.getResultList();
+            System.out.println(tuitionExist);
+            if (tuitionExist.isEmpty()) {
                 em.persist(tuition);
             } else {
                 System.out.println("ERROR: Ya existe la Matricula" + "\n");

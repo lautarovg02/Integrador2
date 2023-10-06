@@ -1,5 +1,6 @@
 package main;
 
+import dao.CareerDAO;
 import dao.StudentDAO;
 import dao.TuitionDAO;
 import entities.Career;
@@ -23,11 +24,56 @@ public class Insert {
         //EMTITY MANAGER
         EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
-        // EJERCICIO 2-B
+
+//        insertStudents(em);
+
+//        insertCareers(em);
+
+//        insertTuitions(em);
+
+        emf.close();
+    }
+
+    private static void insertStudents(EntityManager em) {
+        //EJERCICIO 2-A
+        Student newStudent = null;
+        StudentDAO studentDAO = new StudentDAO(em);
+        CSVParser parser = getCSVParser(STUDENT_FILE);
+        for (CSVRecord row : parser) {
+            Long dni =  Long.parseLong(row.get(0));
+            String name  = row.get(1);
+            String lastName  = row.get(2);
+            Integer age  =  Integer.parseInt(row.get(3));
+            String genere = row.get(4);
+            String city  = row.get(5);
+            Integer uniNumber  =  Integer.parseInt(row.get(6));
+            newStudent = new Student(dni,name,lastName,genere,city,age,uniNumber);
+            System.out.println(newStudent);
+           studentDAO.addStudent(newStudent);
+        }
+        em.close();//Lo dejamos sino se rompe por abrir y cerrar muchas conexiones
+        System.out.print(" .....................PROCESO FINALIZADO \n ");
+
+    }
+
+    private static void insertCareers(EntityManager em) {
+        Career c = null;
+        CareerDAO cDAO = new CareerDAO(em);
+        System.out.print("Cargando Career .....................");
+        CSVParser parserCareer = getCSVParser(CAREER_FILE);
+        for (CSVRecord row : parserCareer) {
+           c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
+            System.out.println(c);
+            cDAO.addCareer(c);
+        }
+        em.close();
+        System.out.print(" .....................PROCESO FINALIZADO \n ");
+    }
+
+    private static void insertTuitions(EntityManager em) {
         Tuition t = null;
         System.out.print("Cargando TUITON_FILE .....................");
         CSVParser parser = getCSVParser(TUITION_CSV);
-        long counter = 0;
         TuitionDAO tDAO = new TuitionDAO(em);
         for (CSVRecord row : parser) {
             Student student = em.find(Student.class, Long.parseLong(row.get(1)));
@@ -35,101 +81,13 @@ public class Insert {
             int inscription = Integer.parseInt(row.get(3));
             int antiquity = Integer.parseInt(row.get(5));
             int graduate = Integer.parseInt(row.get(4));
-            t = new Tuition(career,student,antiquity, inscription , graduate);
+            t = new Tuition(career, student, antiquity, inscription, graduate);
             System.out.println(t);
             tDAO.addTution(t);
         }
         em.close();
         System.out.print(" .....................PROCESO FINALIZADO \n ");
-
-
-
-
-
-
-//        //EJERCICIO 2-A
-//        Student newStudent = null;
-//        StudentDAO studentDAO = new StudentDAO(em);
-//        CSVParser parser = getCSVParser(STUDENT_FILE);
-//        for (CSVRecord row : parser) {
-//            Long dni =  Long.parseLong(row.get(0));
-//            String name  = row.get(1);
-//            String lastName  = row.get(2);
-//            Integer age  =  Integer.parseInt(row.get(3));
-//            String genere = row.get(4);
-//            String city  = row.get(5);
-//            Integer uniNumber  =  Integer.parseInt(row.get(6));
-//            newStudent = new Student(dni,name,lastName,genere,city,age,uniNumber);
-//            System.out.println(newStudent);
-//           studentDAO.addStudent(newStudent);
-//        }
-//        em.close();//Lo dejamos sino se rompe por abrir y cerrar muchas conexiones
-
-        /*
-         * CARGANDO ENTIDADES SIN DAOS
-         */
-//        em.getTransaction().begin(); //** DESCOMENTAR EN CASO DE CARGAR ENTIDADES SIN DAO  Y DESCOMENTAR 97 y 98**
-//        Student p = null;
-//        System.out.print("Cargando estudiantes .....................");
-//        CSVParser parserStudents = getCSVParser(STUDENT_FILE);
-//        for (CSVRecord row : parserStudents) {
-//            Long dni =  Long.parseLong(row.get(0));
-//            String name  = row.get(1);
-//            String lastName  = row.get(2);
-//            Integer age  =  Integer.parseInt(row.get(3));
-//            String genere = row.get(4);
-//            String city  = row.get(5);
-//            Integer uniNumber  =  Integer.parseInt(row.get(6));
-//            newStudent = new Student(dni,name,lastName,genere,city,age,uniNumber);
-//            em.persist(p);
-//            System.out.println(p);
-//            System.out.print(".");
-//        }
-//        System.out.print(" .....................PROCESO FINALIZADO \n ");
-
-        /*** CARGAR DE UNA ENTIDAD A LA VES */
-//
-//        Career c = null;
-//        System.out.print("Cargando Career .....................");
-//        CSVParser parserCareer = getCSVParser(CAREER_FILE);
-//        for (CSVRecord row : parserCareer) {
-//           c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
-//            System.out.println(c);
-//            em.persist(c);
-//        }
-//        System.out.print(" .....................PROCESO FINALIZADO \n ");
-
-
-//        /*** CARGAR DE UNA ENTIDAD A LA VES */
-//        em.getTransaction().begin();
-//        Tuition t = null;
-//        System.out.print("Cargando TUITON_FILE .....................");
-//        CSVParser parser = getCSVParser(TUITION_CSV);
-//        long counter = 0;
-//        for (CSVRecord row : parser) {
-//            Student student = em.find(Student.class, Long.parseLong(row.get(1)));
-//            Career career = em.find(Career.class, Long.parseLong(row.get(2)));
-//            int inscription = Integer.parseInt(row.get(3));
-//            int antiquity = Integer.parseInt(row.get(5));
-//            int graduate = Integer.parseInt(row.get(4));
-//            t = new Tuition(career,student,antiquity, inscription , graduate);
-//            System.out.println(t);
-//            em.persist(t);
-//        }
-//        System.out.print(" .....................PROCESO FINALIZADO \n ");
-
-
-
-        // CLOSE
-//        em.getTransaction().commit();
-//        em.close();
-        emf.close();
     }
-
-
-
-
-
 
 
     private static CSVParser getCSVParser(String file) {
