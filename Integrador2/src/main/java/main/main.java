@@ -18,6 +18,8 @@ public class main {
         EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
 
+        //CARGAMOS LOS CSV
+        Insert.cargarCSV(em);
 
         /**
          * Ejercicio 2 a
@@ -61,6 +63,14 @@ public class main {
          * Recuperar un Estudiante, en base a su numero de libreta universitaria
          * **/
         System.out.println("MESII PAPAAA: " + studentRepository.getStudentByUniN(10));
+
+
+        /**
+         * Ejercicio 2 e
+         *
+         * Recuperar todos los Estudiantes, en base a su Genero
+         * **/
+        System.out.println("Estudiantes por genero Alien " + studentRepository.getStudentsByGenre("Alien"));
 
         em.close();
 

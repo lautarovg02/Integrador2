@@ -6,13 +6,11 @@ import repository.TuitionRepository;
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
-import factory.MyFactoryEntityManager;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -20,18 +18,14 @@ public class Insert {
     private static String pathFilesCsv = "./src/main/resources/csv/";
     private static final String STUDENT_FILE = "estudiantes.csv", TUITION_CSV = "estudianteCarrera.csv", CAREER_FILE = "carreras.csv", PERSISTENCE_NAME = "Integrador2";
 
-    public static void main(String[] args) {
+    public static void cargarCSV(EntityManager em) {
         //EMTITY MANAGER
-        EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
-        EntityManager em = emf.createEntityManager();
 
-//        insertStudents(em);
+        insertStudents(em);
 
-//        insertCareers(em);
+        insertCareers(em);
 
-//        insertTuitions(em);
-
-        emf.close();
+        insertTuitions(em);
     }
 
     private static void insertStudents(EntityManager em) {
@@ -40,18 +34,17 @@ public class Insert {
         StudentRepository studentDAO = new StudentRepository(em);
         CSVParser parser = getCSVParser(STUDENT_FILE);
         for (CSVRecord row : parser) {
-            Long dni =  Long.parseLong(row.get(0));
-            String name  = row.get(1);
-            String lastName  = row.get(2);
-            Integer age  =  Integer.parseInt(row.get(3));
+            Long dni = Long.parseLong(row.get(0));
+            String name = row.get(1);
+            String lastName = row.get(2);
+            Integer age = Integer.parseInt(row.get(3));
             String genere = row.get(4);
-            String city  = row.get(5);
-            Integer uniNumber  =  Integer.parseInt(row.get(6));
-            newStudent = new Student(dni,name,lastName,genere,city,age,uniNumber);
+            String city = row.get(5);
+            Integer uniNumber = Integer.parseInt(row.get(6));
+            newStudent = new Student(dni, name, lastName, genere, city, age, uniNumber);
             System.out.println(newStudent);
-           studentDAO.addStudent(newStudent);
+            studentDAO.addStudent(newStudent);
         }
-        em.close();//Lo dejamos sino se rompe por abrir y cerrar muchas conexiones
         System.out.print(" .....................PROCESO FINALIZADO \n ");
 
     }
@@ -62,11 +55,10 @@ public class Insert {
         System.out.print("Cargando Career .....................");
         CSVParser parserCareer = getCSVParser(CAREER_FILE);
         for (CSVRecord row : parserCareer) {
-           c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
+            c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
             System.out.println(c);
             cDAO.addCareer(c);
         }
-        em.close();
         System.out.print(" .....................PROCESO FINALIZADO \n ");
     }
 
@@ -85,7 +77,6 @@ public class Insert {
             System.out.println(t);
             tDAO.addTution(t);
         }
-        em.close();
         System.out.print(" .....................PROCESO FINALIZADO \n ");
     }
 
