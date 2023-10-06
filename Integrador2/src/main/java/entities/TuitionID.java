@@ -3,14 +3,13 @@ package entities;
 import javax.persistence.Entity;
 import java.io.Serializable;
 
-
 public class TuitionID implements Serializable {
     private Long DNI;
     private  Long idCareer;
 
     public TuitionID() {
+
     }
-//
     public TuitionID(Long DNI, Long idCareer) {
         this.DNI = DNI;
         this.idCareer = idCareer;

@@ -1,3 +1,6 @@
+package main;
+
+import Factory.FactoryEntityManager;
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
@@ -16,10 +19,9 @@ public class Insert {
     private static String pathFilesCsv = "./src/main/resources/csv/";
     private static final String STUDENT_FILE = "students.csv", TUITION_CSV = "tuition.csv", CAREER_FILE = "career.csv", PERSISTENCE_NAME = "Integrador2";
 
-    protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
-    protected static EntityManager em = emf.createEntityManager();
-
     public static void main(String[] args) {
+        EntityManagerFactory emf = FactoryEntityManager.getEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
 
