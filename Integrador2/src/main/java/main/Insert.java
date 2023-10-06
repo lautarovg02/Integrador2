@@ -1,26 +1,20 @@
 package main;
 
-import Factory.FactoryEntityManager;
-import entities.Career;
-import entities.Student;
-import entities.Tuition;
+import Factory.MyFactoryEntityManager;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 
 public class Insert {
     private static String pathFilesCsv = "./src/main/resources/csv/";
     private static final String STUDENT_FILE = "students.csv", TUITION_CSV = "tuition.csv", CAREER_FILE = "career.csv", PERSISTENCE_NAME = "Integrador2";
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = FactoryEntityManager.getEntityManager();
+        EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
