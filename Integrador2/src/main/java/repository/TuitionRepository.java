@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import entities.Career;
 import entities.Student;
@@ -8,11 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-public class TuitionDAO {
+public class TuitionRepository {
 
     EntityManager em;
 
-    public TuitionDAO(EntityManager em) {
+    public TuitionRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -1,8 +1,8 @@
 package main;
 
-import dao.CareerDAO;
-import dao.StudentDAO;
-import dao.TuitionDAO;
+import repository.CareerRepository;
+import repository.StudentRepository;
+import repository.TuitionRepository;
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
@@ -37,7 +37,7 @@ public class Insert {
     private static void insertStudents(EntityManager em) {
         //EJERCICIO 2-A
         Student newStudent = null;
-        StudentDAO studentDAO = new StudentDAO(em);
+        StudentRepository studentDAO = new StudentRepository(em);
         CSVParser parser = getCSVParser(STUDENT_FILE);
         for (CSVRecord row : parser) {
             Long dni =  Long.parseLong(row.get(0));
@@ -58,7 +58,7 @@ public class Insert {
 
     private static void insertCareers(EntityManager em) {
         Career c = null;
-        CareerDAO cDAO = new CareerDAO(em);
+        CareerRepository cDAO = new CareerRepository(em);
         System.out.print("Cargando Career .....................");
         CSVParser parserCareer = getCSVParser(CAREER_FILE);
         for (CSVRecord row : parserCareer) {
@@ -74,7 +74,7 @@ public class Insert {
         Tuition t = null;
         System.out.print("Cargando TUITON_FILE .....................");
         CSVParser parser = getCSVParser(TUITION_CSV);
-        TuitionDAO tDAO = new TuitionDAO(em);
+        TuitionRepository tDAO = new TuitionRepository(em);
         for (CSVRecord row : parser) {
             Student student = em.find(Student.class, Long.parseLong(row.get(1)));
             Career career = em.find(Career.class, Long.parseLong(row.get(2)));

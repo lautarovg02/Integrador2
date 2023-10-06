@@ -1,16 +1,13 @@
-package dao;
+package repository;
 
 import entities.Career;
-import entities.Student;
-import entities.Tuition;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-public class CareerDAO {
+public class CareerRepository {
     EntityManager em;
 
-    public CareerDAO(EntityManager em) {
+    public CareerRepository(EntityManager em) {
         this.em = em;
     }
 

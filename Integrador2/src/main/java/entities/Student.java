@@ -1,8 +1,5 @@
 package entities;
 
-import dao.StudentDAO;
-
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,18 +1,16 @@
-package dao;
+package repository;
 
 import entities.Student;
-import factory.MyFactoryEntityManager;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO {
+public class StudentRepository {
     EntityManager em;
 
-    public StudentDAO(EntityManager em) {
+    public StudentRepository(EntityManager em) {
         this.em = em;
     }
 

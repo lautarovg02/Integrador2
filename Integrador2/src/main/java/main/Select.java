@@ -1,6 +1,6 @@
 package main;
 
-import dao.StudentDAO;
+import repository.StudentRepository;
 import entities.Student;
 import factory.MyFactoryEntityManager;
 
@@ -14,7 +14,7 @@ public class Select {
         EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
 
-        StudentDAO studentDAO = new StudentDAO(em);
+        StudentRepository studentDAO = new StudentRepository(em);
         List<Student> students = studentDAO.getStudentsInOrder();
 
         students.forEach(System.out::println);
