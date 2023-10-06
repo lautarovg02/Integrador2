@@ -1,11 +1,16 @@
 package entities;
 
+import dao.StudentDAO;
+
+import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(name = Student.SEARCH_ALL, query = "SELECT s FROM Student s GROUP BY uniNumber ORDER BY uniNumber")
 public class Student {
+    public static final String SEARCH_ALL = "Student.SEARCH_ALL";
     @Id
     private Long DNI;
     @Column
