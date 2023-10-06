@@ -3,6 +3,9 @@ package repository;
 import entities.Career;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+
 
 public class CareerRepository {
     EntityManager em;
@@ -18,5 +21,14 @@ public class CareerRepository {
             em.persist(career);
         }
         em.getTransaction().commit();
+    }
+
+    public List<Career> getCareers(){
+        em.getTransaction().begin();
+        String jpql = Career.SEARCH_ALL_CAREERS;
+        Query query = em.createNamedQuery(jpql);
+        List<Career> careers = query.getResultList();
+        em.getTransaction().commit();
+        return  careers;
     }
 }

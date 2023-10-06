@@ -9,8 +9,6 @@
         <class>entities.Student</class>
         <class>entities.Career</class>
         <class>entities.Tuition</class>
-        <class>entities.TuitionID</class>
-
 
         <properties>
             <!--            propiedades de la configuracion de JDBC para MSQL-->
