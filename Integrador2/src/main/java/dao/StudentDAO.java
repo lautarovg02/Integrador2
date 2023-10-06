@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NamedQuery;
 import javax.persistence.Query;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAO {
@@ -27,4 +29,15 @@ public class StudentDAO {
 
     }
 
+
+    public List<Student> getStudentsInOrder() {
+        List<Student> students = new ArrayList<>();
+        em.getTransaction().begin();
+
+        String jpql = Student.SEARCH_ALL;
+        Query query = em.createNamedQuery(jpql);
+        students = (List<Student>) query.getResultList();
+        em.getTransaction().commit();
+        return students;
+    }
 }
