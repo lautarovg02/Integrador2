@@ -23,7 +23,6 @@ public class TuitionRepository {
             em.getTransaction().begin();
             Career existC = em.find(Career.class, tuition.getCareer().getIdCareer());
             Student existS = em.find(Student.class, tuition.getStudent().getDNI());
-//        Tuition exist = em.find(Tuition.class, tuition.getId());
 
             String jpql = "SELECT t FROM Tuition t WHERE t.student = :DNI AND t.career = :id_career";
             Query query = em.createQuery(jpql);
@@ -51,7 +50,7 @@ public class TuitionRepository {
 
 
     public List<CareerDTO> getCareerWithStudentsEnrolled() {
-        List<CareerDTO> tuitions;
+        List<CareerDTO> careers;
 
         em.getTransaction().begin();
 
@@ -59,14 +58,14 @@ public class TuitionRepository {
                 "  FROM Tuition t GROUP BY t.career ORDER BY COUNT(t.career) DESC";
 
         Query query = em.createQuery(jpql);
-        tuitions = query.getResultList();
+        careers = query.getResultList();
 
         em.getTransaction().commit();
-        return tuitions;
+        return careers;
     }
 
     public List<StudentDTO> getStudentsByCareerFilterByCiudad(String careerName) {
-        List<StudentDTO> tuitions;
+        List<StudentDTO> students;
 
         em.getTransaction().begin();
 
@@ -74,9 +73,9 @@ public class TuitionRepository {
                 "FROM Tuition t WHERE t.career.name = :careerName ORDER BY t.student.city";
 
         Query query = em.createQuery(jpql).setParameter("careerName", careerName);
-        tuitions = query.getResultList();
+        students = query.getResultList();
 
         em.getTransaction().commit();
-        return tuitions;
+        return students;
     }
 }

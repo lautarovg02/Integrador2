@@ -31,7 +31,7 @@ public class Insert {
     private static void insertStudents(EntityManager em) {
         //EJERCICIO 2-A
         Student newStudent = null;
-        StudentRepository studentDAO = new StudentRepository(em);
+        StudentRepository studentRepository = new StudentRepository(em);
         CSVParser parser = getCSVParser(STUDENT_FILE);
         for (CSVRecord row : parser) {
             Long dni = Long.parseLong(row.get(0));
@@ -43,7 +43,7 @@ public class Insert {
             Integer uniNumber = Integer.parseInt(row.get(6));
             newStudent = new Student(dni, name, lastName, genere, city, age, uniNumber);
             System.out.println(newStudent);
-            studentDAO.addStudent(newStudent);
+            studentRepository.addStudent(newStudent);
         }
         System.out.print(" .....................PROCESO FINALIZADO \n ");
 
@@ -51,13 +51,13 @@ public class Insert {
 
     private static void insertCareers(EntityManager em) {
         Career c = null;
-        CareerRepository cDAO = new CareerRepository(em);
+        CareerRepository careerRepository = new CareerRepository(em);
         System.out.print("Cargando Career .....................");
         CSVParser parserCareer = getCSVParser(CAREER_FILE);
         for (CSVRecord row : parserCareer) {
             c = new Career(Long.parseLong(row.get(0)), row.get(1), Integer.parseInt(row.get(2)));
             System.out.println(c);
-            cDAO.addCareer(c);
+            careerRepository.addCareer(c);
         }
         System.out.print(" .....................PROCESO FINALIZADO \n ");
     }
@@ -66,7 +66,7 @@ public class Insert {
         Tuition t = null;
         System.out.print("Cargando TUITON_FILE .....................");
         CSVParser parser = getCSVParser(TUITION_CSV);
-        TuitionRepository tDAO = new TuitionRepository(em);
+        TuitionRepository tuitionRepository = new TuitionRepository(em);
         for (CSVRecord row : parser) {
             Student student = em.find(Student.class, Long.parseLong(row.get(1)));
             Career career = em.find(Career.class, Long.parseLong(row.get(2)));
@@ -75,7 +75,7 @@ public class Insert {
             int graduate = Integer.parseInt(row.get(4));
             t = new Tuition(career, student, antiquity, inscription, graduate);
             System.out.println(t);
-            tDAO.addTution(t);
+            tuitionRepository.addTution(t);
         }
         System.out.print(" .....................PROCESO FINALIZADO \n ");
     }

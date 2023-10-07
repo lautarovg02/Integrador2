@@ -18,8 +18,8 @@ public class CareerRepository {
 
     public void addCareer(Career career) {
         em.getTransaction().begin();
-        Career exist = em.find(Career.class, career.getIdCareer());
-        if (career != null && exist == null) {
+        Career ifExist = em.find(Career.class, career.getIdCareer());
+        if (career != null && ifExist == null) {
             em.persist(career);
         }
         em.getTransaction().commit();

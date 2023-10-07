@@ -20,8 +20,8 @@ public class StudentRepository {
 
         em.getTransaction().begin();
 
-        Student exist = em.find(Student.class, student.getDNI());
-        if (student != null && exist == null) {
+        Student ifExist = em.find(Student.class, student.getDNI());
+        if (student != null && ifExist == null) {
             em.persist(student);
         }
 
