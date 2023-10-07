@@ -1,6 +1,7 @@
 package main;
 
 import dto.CareerDTO;
+import dto.ReportDTO;
 import dto.StudentDTO;
 import entities.Tuition;
 import factory.EntityFactory;
@@ -99,9 +100,12 @@ public class main {
         List<StudentDTO> studentDTO = tuitionRepo.getStudentsByCareerFilterByCiudad("TUDAI");
         System.out.println("EJERCICIO G: " + studentDTO);
 */
+        //Ejercicio 3
+        TuitionRepository tuitionRepository = new TuitionRepository(em);
+        List<ReportDTO> reportDTOS = tuitionRepository.getReport();
+        reportDTOS.forEach(System.out::println);
 
         em.close();
-
         emf.close();
     }
 }

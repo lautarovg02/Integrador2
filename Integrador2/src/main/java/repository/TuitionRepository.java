@@ -1,6 +1,7 @@
 package repository;
 
 import dto.CareerDTO;
+import dto.ReportDTO;
 import dto.StudentDTO;
 import entities.Career;
 import entities.Student;
@@ -8,7 +9,10 @@ import entities.Tuition;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class TuitionRepository {
 
@@ -77,5 +81,49 @@ public class TuitionRepository {
 
         em.getTransaction().commit();
         return students;
+    }
+
+    public List<ReportDTO> getReport() {
+        List<ReportDTO> reportInscriptionsDTO = new ArrayList<>();
+        List<ReportDTO> reportGraduatesDTO = new ArrayList<>();
+        List<ReportDTO> report = new ArrayList<>();
+        int yearReport;
+        Long cantGraduates , cantInscription;
+        String careerName;
+        em.getTransaction().begin();
+
+        String jpqlInscription = "SELECT new dto.ReportDTO(t.career.name, count(t.inscription),  t.inscription)  FROM Tuition t " +
+                "GROUP BY t.inscription, t.career";
+
+        String jpqlGraduate = "SELECT new dto.ReportDTO(t.career.name, count(t.graduate),  t.graduate)  FROM Tuition t " +
+                "WHERE t.graduate > 0" +
+                "GROUP BY t.graduate, t.career";
+
+
+        Query queryInscription = em.createQuery(jpqlInscription);
+
+        reportInscriptionsDTO = queryInscription.getResultList();
+
+        Query queryGraduate = em.createQuery(jpqlGraduate);
+
+        reportGraduatesDTO = queryGraduate.getResultList();
+
+        System.out.println("ACA EMPIEZA LOS NUEVOS DTO");
+        for (ReportDTO inscriptions : reportInscriptionsDTO){
+            for (ReportDTO graduates : reportGraduatesDTO){
+                if(inscriptions.getYearReport() == graduates.getYearReport()
+                        && Objects.equals(inscriptions.getNameCareer(), graduates.getNameCareer())){
+                    careerName = inscriptions.getNameCareer();
+                    cantGraduates = graduates.getEnrolled();
+                    cantInscription = inscriptions.getEnrolled();
+                    yearReport = inscriptions.getYearReport();
+                    ReportDTO r = new ReportDTO(careerName,cantInscription,cantGraduates,yearReport);
+                    report.add(r);
+                }
+            }
+        }
+
+        em.getTransaction().commit();
+        return report;
     }
 }
