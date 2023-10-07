@@ -1,6 +1,7 @@
 package repository;
 
 import dto.CareerDTO;
+import dto.StudentDTO;
 import entities.Career;
 import entities.Student;
 import entities.Tuition;
@@ -49,8 +50,8 @@ public class TuitionRepository {
     }
 
 
-    public List<Tuition> getCareerWithStudentsEnrolled() {
-        List<Tuition> tuitions ;
+    public List<CareerDTO> getCareerWithStudentsEnrolled() {
+        List<CareerDTO> tuitions;
 
         em.getTransaction().begin();
 
@@ -58,21 +59,21 @@ public class TuitionRepository {
                 "  FROM Tuition t GROUP BY t.career ORDER BY COUNT(t.career) DESC";
 
         Query query = em.createQuery(jpql);
-        tuitions= query.getResultList();
+        tuitions = query.getResultList();
 
         em.getTransaction().commit();
         return tuitions;
     }
 
-    public List<Tuition> getStudentsByCareerFilterByCiudad() {
-        List<Tuition> tuitions ;
+    public List<StudentDTO> getStudentsByCareerFilterByCiudad(String careerName) {
+        List<StudentDTO> tuitions;
 
         em.getTransaction().begin();
 
-        String jpql = "SELECT new dto.CareerDTO(t.career.idCareer, t.career.name, count(t.career))" +
-                "FROM Tuition t GROUP BY t.career ORDER BY COUNT(t.career) DESC";
+        String jpql = "SELECT new dto.StudentDTO(t.student.name, t.student.city, t.student.DNI, t.career.name)" +
+                "FROM Tuition t WHERE t.career.name = :careerName ORDER BY t.student.city";
 
-        Query query = em.createQuery(jpql);
+        Query query = em.createQuery(jpql).setParameter("careerName", careerName);
         tuitions = query.getResultList();
 
         em.getTransaction().commit();

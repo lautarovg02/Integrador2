@@ -42,22 +42,22 @@ public class Tuition {
     @Override
     public String toString() {
 
-        if(student != null && career != null){
-            return "Tuition{"+ "\n" +
+        if (student != null && career != null) {
+            return "Tuition{" + "\n" +
                     " id=" + id + "\n" +
                     " career=" + career.getName() +
                     " student=" + student.getName() +
                     " antiquity=" + antiquity +
                     " inscription=" + inscription +
                     " graduate=" + graduate +
-                    "\n"+ '}' + "\n";
+                    "\n" + '}' + "\n";
         }
-        return "Tuition{"+ "\n" +
+        return "Tuition{" + "\n" +
                 " id=" + id + "\n" +
                 " antiquity=" + antiquity +
                 " inscription=" + inscription +
                 " graduate=" + graduate +
-                "\n"+ '}' + "\n";
+                "\n" + '}' + "\n";
     }
 
     public Long getId() {

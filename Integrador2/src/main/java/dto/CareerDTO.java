@@ -58,6 +58,6 @@ public class CareerDTO {
                 "idCareer=" + idCareer +
                 ", name='" + name + '\'' +
                 ", cantEnrolled=" + cantEnrolled +
-                '}';
+                "} \n";
     }
 }

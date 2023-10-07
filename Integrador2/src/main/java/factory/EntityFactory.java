@@ -13,9 +13,10 @@ public abstract class EntityFactory {
     public static final int JPA_HIBERNATE = 3;
 
     public abstract CareerRepository careerRepo();
-    public abstract StudentRepository studentRepo();
-    public abstract TuitionRepository tuitionRepo();
 
+    public abstract StudentRepository studentRepo();
+
+    public abstract TuitionRepository tuitionRepo();
 
 
     public static EntityManagerFactory getEntityFactory(int whichFactory) {

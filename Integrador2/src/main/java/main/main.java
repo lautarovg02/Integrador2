@@ -1,9 +1,13 @@
 package main;
 
+import dto.CareerDTO;
+import dto.StudentDTO;
 import entities.Tuition;
 import factory.EntityFactory;
+import jdk.swing.interop.SwingInterOpUtils;
 import repository.CareerRepository;
 import factory.MyFactoryEntityManager;
+import repository.StudentRepository;
 import repository.TuitionRepository;
 
 import javax.persistence.EntityManager;
@@ -18,7 +22,7 @@ public class main {
 
 
         //CARGAMOS LOS CSV
-        Insert.cargarCSV(em);
+//        Insert.cargarCSV(em);
 
         /**
          * Ejercicio 2 a
@@ -72,7 +76,6 @@ public class main {
 //        System.out.println("Estudiantes por genero Alien " + studentRepository.getStudentsByGenre("Alien"));
 
 
-
         // Ejercicio 2 f
         /**
          * recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
@@ -80,8 +83,8 @@ public class main {
 
         /*
         TuitionRepository tuitionRepository = new TuitionRepository(em);
-        List<Tuition> tuitions =  tuitionRepository.getCareerWithStudentsEnrolled();
-        System.out.println(tuitions);
+        List<CareerDTO> tuitions =  tuitionRepository.getCareerWithStudentsEnrolled();
+        System.out.println("EJERCICIO F: "+tuitions);
         */
 
         // Ejercicio 2 g
@@ -89,6 +92,11 @@ public class main {
          *  recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
          */
 
+        /*
+        TuitionRepository tuitionRepo = new TuitionRepository(em);
+        List<StudentDTO> students = tuitionRepo.getStudentsByCareerFilterByCiudad("TUDAI");
+        System.out.println("EJERCICIO G: " + students);
+        */
 
         em.close();
 

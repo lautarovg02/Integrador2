@@ -25,13 +25,13 @@ public class CareerRepository {
         em.getTransaction().commit();
     }
 
-    public List<Career> getCareers(){
+    public List<Career> getCareers() {
         em.getTransaction().begin();
         String jpql = Career.SEARCH_ALL_CAREERS;
         Query query = em.createNamedQuery(jpql);
         List<Career> careers = query.getResultList();
         em.getTransaction().commit();
-        return  careers;
+        return careers;
     }
 
 }
