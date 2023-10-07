@@ -1,12 +1,9 @@
 package main;
 
-import repository.CareerRepository;
-import repository.StudentRepository;
-import repository.TuitionRepository;
-import entities.Career;
-import entities.Student;
 import entities.Tuition;
+import repository.CareerRepository;
 import factory.MyFactoryEntityManager;
+import repository.TuitionRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,15 +15,16 @@ public class main {
         EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
         EntityManager em = emf.createEntityManager();
 
+
         //CARGAMOS LOS CSV
-        Insert.cargarCSV(em);
+        //Insert.cargarCSV(em);
 
         /**
          * Ejercicio 2 a
          *
          * Dar de alta un estudiante.
          * **/
-        Student newStudent = new Student(33016244L, "Lionel", "Messi", "Alien", "Rosario", 36, 10);
+       /* Student newStudent = new Student(33016244L, "Lionel", "Messi", "Alien", "Rosario", 36, 10);
         StudentRepository studentRepository = new StudentRepository(em);
         studentRepository.addStudent(newStudent);
 
@@ -37,10 +35,10 @@ public class main {
          * Matricular un Estudiante en una Carrera.
          * **/
 
-        // Creamos una carrera para matricular
+       /* // Creamos una carrera para matricular
         Career career = new Career(100, "TUDAI", 3);
-        CareerRepository careerDAO = new CareerRepository(em);
-        careerDAO.addCareer(career);
+        CareerRepository careerRepository = new CareerRepository(em);
+        careerRepository.addCareer(career);
 
 
         // Agregamos la matricula
@@ -53,7 +51,7 @@ public class main {
          *
          * Recuperar todos los Estudiantes, y especificar algun criterio de ordenamiento simple.
          * **/
-        List<Student> students = studentRepository.getStudentsInOrder();
+        /*List<Student> students = studentRepository.getStudentsInOrder();
         students.forEach(System.out::println);
 
 
@@ -62,7 +60,7 @@ public class main {
          *
          * Recuperar un Estudiante, en base a su numero de libreta universitaria
          * **/
-        System.out.println("MESII PAPAAA: " + studentRepository.getStudentByUniN(10));
+      /*  System.out.println("MESII PAPAAA: " + studentRepository.getStudentByUniN(10));
 
 
         /**
@@ -70,7 +68,24 @@ public class main {
          *
          * Recuperar todos los Estudiantes, en base a su Genero
          * **/
-        System.out.println("Estudiantes por genero Alien " + studentRepository.getStudentsByGenre("Alien"));
+//        System.out.println("Estudiantes por genero Alien " + studentRepository.getStudentsByGenre("Alien"));
+
+
+
+        // Ejercicio 2 f
+        /**
+         * recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+         */
+
+
+        TuitionRepository tuitionRepository = new TuitionRepository(em);
+        List<Tuition> tuitions =  tuitionRepository.getCareerWithStudentsEnrolled();
+        System.out.println(tuitions);
+
+        // Ejercicio 2 g
+        /**
+         *  recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
+         */
 
         em.close();
 

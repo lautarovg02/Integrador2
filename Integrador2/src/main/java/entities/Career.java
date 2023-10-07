@@ -19,7 +19,7 @@ public class Career {
     @Column
     private int duration;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private List<Tuition> tuitions;
 
     public Career() {
@@ -73,6 +73,7 @@ public class Career {
                 "idCareer=" + idCareer +
                 ", name='" + name + '\'' +
                 ", duration=" + duration +
+                ",tuitions=" + tuitions +
                 '}' + "\n";
     }
 }

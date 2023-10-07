@@ -1,6 +1,8 @@
 package repository;
 
+import dto.CareerDTO;
 import entities.Career;
+import entities.Tuition;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -31,4 +33,5 @@ public class CareerRepository {
         em.getTransaction().commit();
         return  careers;
     }
+
 }

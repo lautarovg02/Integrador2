@@ -43,8 +43,8 @@ public class Tuition {
     public String toString() {
         return "Tuition{"+ "\n" +
                 " id=" + id + "\n" +
-                " career=" + career +
-                " student=" + student +
+                " career=" + career.getName() +
+                " student=" + student.getName() +
                 " antiquity=" + antiquity +
                 " inscription=" + inscription +
                 " graduate=" + graduate +
