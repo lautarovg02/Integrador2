@@ -41,10 +41,19 @@ public class Tuition {
 
     @Override
     public String toString() {
+
+        if(student != null && career != null){
+            return "Tuition{"+ "\n" +
+                    " id=" + id + "\n" +
+                    " career=" + career.getName() +
+                    " student=" + student.getName() +
+                    " antiquity=" + antiquity +
+                    " inscription=" + inscription +
+                    " graduate=" + graduate +
+                    "\n"+ '}' + "\n";
+        }
         return "Tuition{"+ "\n" +
                 " id=" + id + "\n" +
-                " career=" + career.getName() +
-                " student=" + student.getName() +
                 " antiquity=" + antiquity +
                 " inscription=" + inscription +
                 " graduate=" + graduate +

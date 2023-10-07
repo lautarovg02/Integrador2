@@ -63,4 +63,19 @@ public class TuitionRepository {
         em.getTransaction().commit();
         return tuitions;
     }
+
+    public List<Tuition> getStudentsByCareerFilterByCiudad() {
+        List<Tuition> tuitions ;
+
+        em.getTransaction().begin();
+
+        String jpql = "SELECT new dto.CareerDTO(t.career.idCareer, t.career.name, count(t.career))" +
+                "FROM Tuition t GROUP BY t.career ORDER BY COUNT(t.career) DESC";
+
+        Query query = em.createQuery(jpql);
+        tuitions = query.getResultList();
+
+        em.getTransaction().commit();
+        return tuitions;
+    }
 }

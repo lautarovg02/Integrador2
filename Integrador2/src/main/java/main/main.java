@@ -1,6 +1,7 @@
 package main;
 
 import entities.Tuition;
+import factory.EntityFactory;
 import repository.CareerRepository;
 import factory.MyFactoryEntityManager;
 import repository.TuitionRepository;
@@ -12,12 +13,12 @@ import java.util.List;
 public class main {
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = MyFactoryEntityManager.getEntityManager();
+        EntityManagerFactory emf = EntityFactory.getEntityFactory(EntityFactory.MYSQL_JDBC);
         EntityManager em = emf.createEntityManager();
 
 
         //CARGAMOS LOS CSV
-        //Insert.cargarCSV(em);
+        Insert.cargarCSV(em);
 
         /**
          * Ejercicio 2 a
@@ -77,15 +78,17 @@ public class main {
          * recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
          */
 
-
+        /*
         TuitionRepository tuitionRepository = new TuitionRepository(em);
         List<Tuition> tuitions =  tuitionRepository.getCareerWithStudentsEnrolled();
         System.out.println(tuitions);
+        */
 
         // Ejercicio 2 g
         /**
          *  recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
          */
+
 
         em.close();
 
