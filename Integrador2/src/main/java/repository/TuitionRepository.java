@@ -87,9 +87,11 @@ public class TuitionRepository {
         List<ReportDTO> reportInscriptionsDTO = new ArrayList<>();
         List<ReportDTO> reportGraduatesDTO = new ArrayList<>();
         List<ReportDTO> report = new ArrayList<>();
+
         int yearReport;
         Long cantGraduates , cantInscription;
         String careerName;
+
         em.getTransaction().begin();
 
         String jpqlInscription = "SELECT new dto.ReportDTO(t.career.name, count(t.inscription),  t.inscription)  FROM Tuition t " +
@@ -108,7 +110,6 @@ public class TuitionRepository {
 
         reportGraduatesDTO = queryGraduate.getResultList();
 
-        System.out.println("ACA EMPIEZA LOS NUEVOS DTO");
         for (ReportDTO inscriptions : reportInscriptionsDTO){
             for (ReportDTO graduates : reportGraduatesDTO){
                 if(inscriptions.getYearReport() == graduates.getYearReport()

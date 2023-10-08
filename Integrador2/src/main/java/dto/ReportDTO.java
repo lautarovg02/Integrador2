@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Objects;
+
 public class ReportDTO {
 
     private String nameCareer;
@@ -29,6 +31,19 @@ public class ReportDTO {
                 ", graduated=" + graduated +
                 ", yearReport=" + yearReport +
                 '}' + "\n";  // Agregado un salto de línea aquí
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReportDTO reportDTO = (ReportDTO) o;
+        return yearReport == reportDTO.yearReport && Objects.equals(nameCareer, reportDTO.nameCareer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameCareer, yearReport);
     }
 
     public String getNameCareer() {
